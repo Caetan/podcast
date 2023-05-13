@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import PodcastListComponent from '../../components/MainPage/PodcastListComponent';
+import PodcastListComponent from '../components/MainPage/PodcastListComponent';
 import {Container} from 'semantic-ui-react';
-import SearchComponent from '../../components/MainPage/SearchComponent';
+import SearchComponent from '../components/MainPage/SearchComponent';
 
-import store from '../../redux/store';
-import {SET_ALL_PODCASTS, SET_FILTERED_PODCASTS} from '../../redux/actionTypes';
+import store from '../redux/store';
+import {SET_ALL_PODCASTS, SET_FILTERED_PODCASTS} from '../redux/actionTypes';
 
 const ITUNES_URL = "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
 
@@ -27,6 +27,7 @@ const MainPage = () => {
     }
     fetchPodcasts()
   }, [])
+  
   return (
     <Container>
       <SearchComponent />

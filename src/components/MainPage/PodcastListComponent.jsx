@@ -11,7 +11,7 @@ const PodcastListComponent = () => {
     <Card.Group>
       {podcasts?.map(podcast => {
         return (
-          <Card key={podcast.id}>
+          <Card key={podcast.id} href={`/podcast/${podcast.id}`}>
             <Image src={podcast.image} wrapped ui={false} />
             <Card.Content>
               <Card.Header>{podcast.song}</Card.Header>
