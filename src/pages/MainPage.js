@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import PodcastListComponent from '../components/MainPage/PodcastListComponent';
-import {Container} from 'semantic-ui-react';
+import {Grid} from 'semantic-ui-react';
 import SearchComponent from '../components/MainPage/SearchComponent';
 
 import store from '../redux/store';
@@ -22,17 +22,19 @@ const MainPage = () => {
           image: item["im:image"][2].label || item["im:image"][0].label,
         };
       });
-      store.dispatch({ type: SET_ALL_PODCASTS, payload: mappedPodcasts })
-      store.dispatch({ type: SET_FILTERED_PODCASTS, payload: mappedPodcasts })
+      store.dispatch({type: SET_ALL_PODCASTS, payload: mappedPodcasts})
+      store.dispatch({type: SET_FILTERED_PODCASTS, payload: mappedPodcasts})
     }
     fetchPodcasts()
   }, [])
-  
+
   return (
-    <Container style={{padding: "2rem"}}>
+    <Grid style={{padding: "2rem"}} centered>
       <SearchComponent />
-      <PodcastListComponent />
-    </Container>
+      <Grid.Row>
+        <PodcastListComponent />
+      </Grid.Row>
+    </Grid>
   );
 };
 
