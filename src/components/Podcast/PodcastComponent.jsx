@@ -8,6 +8,17 @@ import styles from './PodcastComponent.module.css';
 
 const PODCAST_DETAILS = "https://api.allorigins.win/raw?url=https://itunes.apple.com/lookup?id="
 
+function toHoursAndMinutes(totalMinutes) {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  return `${padToTwoDigits(hours)}:${padToTwoDigits(minutes)}`;
+}
+
+function padToTwoDigits(num) {
+  return num.toString().padStart(2, '0');
+}
+
 const PodcastComponent = () => {
   const {podcastId} = useParams();
   const [podcastDetails, setPodcastDetails] = useState();
@@ -67,13 +78,17 @@ const PodcastComponent = () => {
                 </Table.Row>
               </Table.Header>
               {albums?.map(album => {
-                const date = album.children.find(x => {return x.name === "pubDate"})?.value
+                const title = album.children.find(x => {return x.name === "title"})?.value || "Unavailable"
+                const date = new Date(album.children.find(x => {return x.name === "pubDate"})?.value)
+                const formattedDate = isNaN(date) ? "Unavailable" : ("0" + date.getDate()).slice(-2) + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear();
+                const duration = album.children.find(x => {return x.name === "itunes:duration"})?.value
+                const formattedDuration = !duration ? "Unavailable" : duration?.includes(":") ? duration : toHoursAndMinutes(duration)
                 return (
                   <Table.Body key={date}>
                     <Table.Row>
-                      <Table.Cell width={10}>{album.children.find(x => {return x.name === "title"})?.value}</Table.Cell>
-                      <Table.Cell width={3}>{date}</Table.Cell>
-                      <Table.Cell width={3}>{parseFloat(album.children.find(x => {return x.name === "itunes:duration"})?.value)}</Table.Cell>
+                      <Table.Cell width={10}>{title}</Table.Cell>
+                      <Table.Cell width={3}>{formattedDate}</Table.Cell>
+                      <Table.Cell width={3}>{formattedDuration}</Table.Cell>
                     </Table.Row>
                   </Table.Body>
                 )
