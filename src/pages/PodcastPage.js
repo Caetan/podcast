@@ -5,7 +5,7 @@ import {Container} from 'semantic-ui-react';
 
 const PodcastPage = () => {
   return (
-    <Container>
+    <Container style={{padding: "2rem"}}>
       <PodcastComponent />
     </Container>
   );

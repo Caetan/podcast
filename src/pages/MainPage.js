@@ -14,7 +14,7 @@ const MainPage = () => {
   useEffect(() => {
     async function fetchPodcasts() {
       const {feed: {entry: podcasts}} = await fetch(ITUNES_URL).then((response) => response.json())
-      const mappedPodcasts = podcasts.map(item => {
+      const mappedPodcasts = podcasts?.map(item => {
         return {
           id: item.id.attributes["im:id"],
           author: item["im:name"].label,
@@ -29,7 +29,7 @@ const MainPage = () => {
   }, [])
   
   return (
-    <Container>
+    <Container style={{padding: "2rem"}}>
       <SearchComponent />
       <PodcastListComponent />
     </Container>

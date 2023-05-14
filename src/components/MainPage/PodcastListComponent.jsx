@@ -12,7 +12,7 @@ const PodcastListComponent = () => {
       {podcasts?.map(podcast => {
         return (
           <Card key={podcast.id} href={`/podcast/${podcast.id}`}>
-            <Image src={podcast.image} wrapped ui={false} />
+            <Image src={podcast.image} wrapped ui={false} alt="Album cover" />
             <Card.Content>
               <Card.Header>{podcast.song}</Card.Header>
               <Card.Description>Author: {podcast.author}</Card.Description>
