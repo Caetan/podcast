@@ -25,7 +25,6 @@ function padToTwoDigits(num) {
 }
 
 const PodcastComponent = ({podcastDetails, episodes}) => {
-
   return (
       <Grid.Column width={11}>
         <Label className={styles.box} size='massive'>Episodes: {podcastDetails?.trackCount}</Label>
@@ -50,7 +49,9 @@ const PodcastComponent = ({podcastDetails, episodes}) => {
                 return (
                   <Table.Body key={`${date}${title}`}>
                     <Table.Row>
-                      <Table.Cell width={10} href={`/podcast/${episode.collectionId}/episode/${episode.trackId}`} onClick={() => localStorage.setItem('episode', JSON.stringify(episode))}>{title}</Table.Cell>
+                      <Table.Cell width={10} onClick={() => localStorage.setItem('episode', JSON.stringify(episode))}>
+                        <a href={`/podcast/${episode.collectionId}/episode/${episode.trackId}`}>{title}</a>
+                      </Table.Cell>
                       <Table.Cell width={3}>{date}</Table.Cell>
                       <Table.Cell width={3}>{duration}</Table.Cell>
                     </Table.Row>

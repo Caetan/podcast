@@ -1,24 +1,26 @@
 import React from 'react';
-import {Grid} from 'semantic-ui-react';
+import {Grid, Card} from 'semantic-ui-react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
 
 const PodcastPlayComponent = () => {
   const episode = JSON.parse(localStorage.getItem('episode'))
-  console.log(episode)
   return (
     <Grid.Column width={11}>
-      <Grid.Row>
-        {episode.shortDescription}
-      </Grid.Row>
-      <Grid.Row>
-        <AudioPlayer
-          autoPlay
-          src={episode.episodeUrl}
-          style={{width: "80%"}}
-        />
-      </Grid.Row>
+      <Card fluid>
+        <Card.Content>
+          <Card.Description>
+            {episode.shortDescription}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <AudioPlayer
+            autoPlay
+            src={episode.episodeUrl}
+          />
+        </Card.Content>
+      </Card>
     </Grid.Column>
   );
 };

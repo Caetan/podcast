@@ -21,7 +21,8 @@ const PodcastPage = () => {
       setPodcastDetails(basicInfo)
       // Max limit is 200 per request
       const {results: episodes} = await fetch(`${PODCAST_DETAILS}${podcastId}%26entity=podcastEpisode%26limit=${basicInfo.trackCount}`).then((response) => response.json())
-      setEpisodes(episodes)
+      // First episode is not a real episode
+      setEpisodes(episodes?.slice(1))
       // Very slow call
       const {children: moreInfo} = await fetch(`https://api.allorigins.win/raw?url=${basicInfo?.feedUrl}`).then(res => res.text())
         .then(data => {
