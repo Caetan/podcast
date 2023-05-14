@@ -17,8 +17,8 @@ const MainPage = () => {
       const mappedPodcasts = podcasts?.map(item => {
         return {
           id: item.id.attributes["im:id"],
-          author: item["im:name"].label,
-          song: item.title.label,
+          author: item["im:artist"].label,
+          song: item["im:name"].label,
           image: item["im:image"][2].label || item["im:image"][0].label,
         };
       });
